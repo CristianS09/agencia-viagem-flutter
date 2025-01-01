@@ -1,4 +1,5 @@
 import 'package:agencia_viagem/data/data.dart';
+import 'package:agencia_viagem/model/destination.dart';
 
 import 'package:flutter/material.dart';
 
@@ -8,13 +9,26 @@ class DataList extends StatelessWidget {
 
   //Lista de map com os dados de destinos
   final List<Map<String, dynamic>> list = Data.getList;
+  //Lista de destinos
+  List<Destination> destinationList = [];
 
   @override
   Widget build(BuildContext context) {
+    //Retorna uma lista com o objeto destino para cada valor na lista de destino
+    destinationList = list
+        .map((e) => Destination(
+            title: e['title'],
+            price: e['price'],
+            url: e['url'],
+            reviews: e['reviews'],
+            description: e['description']))
+        .toList();
     //ListView que exibe todo o conteudo da lista
     return ListView.builder(
-      itemCount: list.length,
+      itemCount: destinationList.length,
       itemBuilder: (context, index) {
+        //Retorna um objeto destino de acordo com o index
+        Destination destination = destinationList.elementAt(index);
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
@@ -23,7 +37,7 @@ class DataList extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '${list[index]['title']}',
+                  '${destination.title}',
                   style: const TextStyle(
                       fontSize: 30, fontWeight: FontWeight.bold),
                 ),
@@ -32,7 +46,7 @@ class DataList extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
                   subtitle: Text(
-                    '${list[index]['price']}',
+                    '${destination.price}',
                   ),
                   leading: const Icon(
                     Icons.monetization_on,
@@ -46,7 +60,7 @@ class DataList extends StatelessWidget {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
-                    '${list[index]['reviews']}',
+                    '${destination.reviews}',
                   ),
                   leading: const Icon(
                     Icons.star,
@@ -54,7 +68,7 @@ class DataList extends StatelessWidget {
                   ),
                 ),
                 Image.network(
-                  '${list[index]['url']}',
+                  '${destination.url}',
                   //Exibe um CircularProgressIndicator enquanto a imagem não são carregadas
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -64,7 +78,7 @@ class DataList extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  subtitle: Text('${list[index]['description']}'),
+                  subtitle: Text('${destination.description}'),
                   leading: Icon(Icons.notes_sharp),
                 ),
               ],

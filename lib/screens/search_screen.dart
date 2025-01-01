@@ -1,3 +1,4 @@
+import 'package:agencia_viagem/model/destination.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -6,6 +7,12 @@ class SearchScreen extends StatelessWidget {
   SearchScreen(this.data, {super.key});
   @override
   Widget build(BuildContext context) {
+    Destination destination = Destination(
+        title: data['title'],
+        price: data['price'],
+        url: data['url'],
+        reviews: data['reviews'],
+        description: data['description']);
     return Scaffold(
       appBar: AppBar(
         //Centraliza o texto no centro da AppBar
@@ -26,7 +33,7 @@ class SearchScreen extends StatelessWidget {
               elevation: 15,
               child: Column(children: [
                 Text(
-                  '${data['title']}',
+                  '${destination.title}',
                   style: const TextStyle(
                       fontSize: 30, fontWeight: FontWeight.bold),
                 ),
@@ -35,7 +42,7 @@ class SearchScreen extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
                   subtitle: Text(
-                    '${data['price']}',
+                    '${destination.title}',
                   ),
                   leading: const Icon(
                     Icons.monetization_on,
@@ -49,7 +56,7 @@ class SearchScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
-                    '${data['reviews']}',
+                    '${destination.reviews}',
                   ),
                   leading: const Icon(
                     Icons.star,
@@ -57,10 +64,10 @@ class SearchScreen extends StatelessWidget {
                   ),
                 ),
                 Image.network(
-                  '${data['url']}',
+                  '${destination.url}',
                 ),
                 ListTile(
-                  subtitle: Text('${data['description']}'),
+                  subtitle: Text('${destination.description}'),
                   leading: Icon(Icons.notes_sharp),
                 )
               ]),
