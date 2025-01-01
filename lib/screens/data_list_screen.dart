@@ -41,6 +41,7 @@ class DataList extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 30, fontWeight: FontWeight.bold),
                 ),
+                //ListTile para exibir as informações e exibir os icones
                 ListTile(
                   title: const Text('Preço',
                       style:
@@ -53,7 +54,6 @@ class DataList extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                //ListTile para exibir as informações de reviews e preço
                 ListTile(
                   title: const Text(
                     'Avaliação',

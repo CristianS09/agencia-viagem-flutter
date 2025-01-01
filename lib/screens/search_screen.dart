@@ -7,6 +7,7 @@ class SearchScreen extends StatelessWidget {
   SearchScreen(this.data, {super.key});
   @override
   Widget build(BuildContext context) {
+    //Objeto destino
     Destination destination = Destination(
         title: data['title'],
         price: data['price'],
@@ -37,6 +38,7 @@ class SearchScreen extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 30, fontWeight: FontWeight.bold),
                 ),
+                //ListTile para exibir as informações e exibir os icones
                 ListTile(
                   title: const Text('Preço',
                       style:
@@ -49,7 +51,6 @@ class SearchScreen extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                //ListTile para exibir as informações de reviews e preço
                 ListTile(
                   title: const Text(
                     'Avaliação',
@@ -63,9 +64,14 @@ class SearchScreen extends StatelessWidget {
                     color: Colors.orange,
                   ),
                 ),
-                Image.network(
-                  '${destination.url}',
-                ),
+                Image.network('${destination.url}',
+                    //Exibe um CircularProgressIndicator enquanto a imagem não são carregadas
+                    loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
                 ListTile(
                   subtitle: Text('${destination.description}'),
                   leading: Icon(Icons.notes_sharp),
