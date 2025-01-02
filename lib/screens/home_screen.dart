@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               //Define uma cor para o icone do Drawer
               iconTheme: const IconThemeData(color: Colors.white),
               title: const Text(
-                'Explore Mundo',
+                'Destinos',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            //Tela inicial
+            //Lista com os dados
             body: DataList()));
   }
 }

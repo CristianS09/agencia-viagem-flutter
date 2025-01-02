@@ -13,7 +13,8 @@ class SearchScreen extends StatelessWidget {
         price: data['price'],
         url: data['url'],
         reviews: data['reviews'],
-        description: data['description']);
+        description: data['description'],
+        country: data['country']);
     return Scaffold(
       appBar: AppBar(
         //Centraliza o texto no centro da AppBar
@@ -64,14 +65,14 @@ class SearchScreen extends StatelessWidget {
                     color: Colors.orange,
                   ),
                 ),
-                Image.network('${destination.url}',
-                    //Exibe um CircularProgressIndicator enquanto a imagem não são carregadas
-                    loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
+                ListTile(
+                  title: Text('País'),
+                  subtitle: Text('${destination.country}'),
+                  leading: Icon(Icons.location_city_outlined),
+                ),
+                Image.asset(
+                  '${destination.url}',
+                ),
                 ListTile(
                   subtitle: Text('${destination.description}'),
                   leading: Icon(Icons.notes_sharp),

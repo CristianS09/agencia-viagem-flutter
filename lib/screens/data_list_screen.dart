@@ -7,23 +7,24 @@ import 'package:flutter/material.dart';
 class DataList extends StatelessWidget {
   DataList({super.key});
 
-  //Lista de map com os dados de destinos
+  //Lista de Map com os dados de destinos
   final List<Map<String, dynamic>> list = Data.getList;
   //Lista de destinos
   List<Destination> destinationList = [];
 
   @override
   Widget build(BuildContext context) {
-    //Retorna uma lista com o objeto destino para cada valor na lista de destino
+    //Retorna uma lista de objetos destino para cada valor na lista de Map
     destinationList = list
         .map((e) => Destination(
             title: e['title'],
             price: e['price'],
             url: e['url'],
             reviews: e['reviews'],
-            description: e['description']))
+            description: e['description'],
+            country: e['country']))
         .toList();
-    //ListView que exibe todo o conteudo da lista
+    //ListView que exibe todo o conteúdo da lista
     return ListView.builder(
       itemCount: destinationList.length,
       itemBuilder: (context, index) {
@@ -67,15 +68,13 @@ class DataList extends StatelessWidget {
                     color: Colors.orange,
                   ),
                 ),
-                Image.network(
+                ListTile(
+                  title: Text('País'),
+                  subtitle: Text('${destination.country}'),
+                  leading: Icon(Icons.location_city_outlined),
+                ),
+                Image.asset(
                   '${destination.url}',
-                  //Exibe um CircularProgressIndicator enquanto a imagem não são carregadas
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
                 ),
                 ListTile(
                   subtitle: Text('${destination.description}'),

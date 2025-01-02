@@ -5,8 +5,10 @@ class Destination {
   final String url;
   final double reviews;
   final String description;
+  final String country;
 
-  Destination({required this.title, required this.price, required this.url, required this.reviews, required this.description});
+  Destination({required this.title, required this.price, required this.url, required this.reviews, required this.description, required this.country});
 
+  
   
 }

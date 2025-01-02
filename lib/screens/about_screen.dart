@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 //Tela de sobre
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -8,6 +9,8 @@ class AboutScreen extends StatelessWidget {
     return Center(
         child: Scaffold(
       appBar: AppBar(
+        //Centraliza o texto no centro da AppBar
+        centerTitle: true,
         backgroundColor: Colors.black87,
         //Define uma cor para o icone do Drawer
         iconTheme: const IconThemeData(color: Colors.white),
