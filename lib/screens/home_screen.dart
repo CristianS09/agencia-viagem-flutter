@@ -1,4 +1,6 @@
 import 'package:agencia_viagem/data/data.dart';
+import 'package:agencia_viagem/screens/about_screen.dart';
+import 'package:agencia_viagem/screens/contact_screen.dart';
 import 'package:agencia_viagem/screens/data_list_screen.dart';
 import 'package:agencia_viagem/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +78,33 @@ class HomePage extends StatelessWidget {
                               icon: const Icon(Icons.search),
                             ),
                             label: const Text('Para onde gostaria de ir?')),
+                      ),
+                      ListTile(
+                        title: Text('Destinos'),
+                        leading: Icon(Icons.airplanemode_active),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      ListTile(
+                        title: Text('Contato'),
+                        leading: Icon(Icons.phone),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ContactScreen()));
+                        },
+                      ),
+                      ListTile(
+                        title: Text('Sobre nós'),
+                        leading: Icon(Icons.person),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AboutScreen()));
+                        },
                       ),
                     ],
                   ),
