@@ -2,7 +2,7 @@
 
 Aplicativo de agência de viagem desenvolvido em Flutter para a missão prática da faculdade.
 
-![App Gif](https://i.imgur.com/eiF5aBw.gif)
+![App Gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGI4NnY5amNxNTB1ZHN3ZjF5bzJucXV0ZmJxM3U3cjRnNm5xdmY2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2ENY7FcVEaUgGS5IqJ/giphy-downsized-large.gif)
 
 ## Tecnologias Utilizadas
 - **Linguagem:** Dart 🧑🏻‍💻
