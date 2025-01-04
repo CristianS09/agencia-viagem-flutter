@@ -10,7 +10,7 @@ Aplicativo de agência de viagem desenvolvido em Flutter para a missão prática
 
 ## Recursos
 - Barra de pesquisa
-- Lista com os destinos e informação sobre preço e avaliação e país
+- Lista com os destinos e informação sobre preço, avaliação e país
 - Navegação com Drawer
 - Aba sobre
 - Aba de contato
