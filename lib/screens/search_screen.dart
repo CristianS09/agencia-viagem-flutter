@@ -1,84 +1,103 @@
-import 'package:agencia_viagem/model/destination.dart';
+import 'package:agencia_viagem/screens/about_screen.dart';
+import 'package:agencia_viagem/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:agencia_viagem/data/data.dart';
+import 'package:agencia_viagem/screens/result_screen.dart';
 
+//Widget para pesquisar um destino
 class SearchScreen extends StatelessWidget {
-  late Map data;
-  //Recebe os dados no construtor
-  SearchScreen(this.data, {super.key});
+  SearchScreen({super.key});
+
+  //Pega o valor digitado no TextField
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    //Objeto destino
-    Destination destination = Destination(
-        title: data['title'],
-        price: data['price'],
-        url: data['url'],
-        reviews: data['reviews'],
-        description: data['description'],
-        country: data['country']);
-    return Scaffold(
-      appBar: AppBar(
-        //Centraliza o texto no centro da AppBar
-        centerTitle: true,
-        //Define uma cor para o icone de voltar
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black87,
-        title: const Text(
-          'Explore Mundo',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 15,
-              child: Column(children: [
-                Text(
-                  '${destination.title}',
-                  style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-                //ListTile para exibir as informações e exibir os icones
-                ListTile(
-                  title: const Text('Preço',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                  subtitle: Text(
-                    '${destination.title}',
-                  ),
-                  leading: const Icon(
-                    Icons.monetization_on,
-                    color: Colors.green,
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    'Avaliação',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                  ),
-                  subtitle: Text(
-                    '${destination.reviews}',
-                  ),
-                  leading: const Icon(
-                    Icons.star,
-                    color: Colors.orange,
-                  ),
-                ),
-                ListTile(
-                  title: Text('País'),
-                  subtitle: Text('${destination.country}'),
-                  leading: Icon(Icons.location_city_outlined),
-                ),
-                Image.asset(
-                  '${destination.url}',
-                ),
-                ListTile(
-                  subtitle: Text('${destination.description}'),
-                  leading: Icon(Icons.notes_sharp),
-                )
-              ]),
-            ),
+    return Drawer(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                    icon: IconButton(
+                      onPressed: () {
+                        //Verifica se o campo foi preenchido
+                        String? search = _searchController.text != ''
+                            ? _searchController.text.trim()
+                            : null;
+                        //Lista de Map
+                        final list = Data.getList;
+                        //Lista com todos os títulos da lista de Map
+                        final allTitle = list
+                            .map((e) => e['title'].toString().toLowerCase())
+                            .toList();
+                        //Verifica o título pesquisado em LowerCase para melhorar o resultado da busca
+                        bool test = allTitle.contains(search?.toLowerCase());
+                        if (test) {
+                          //Retorna o elemento pesquisado
+                          var result = list.where((e) =>
+                              e['title'].toString().toLowerCase() ==
+                              search?.toLowerCase());
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    //Passa o restultado para o construtor do ResultScreen
+                                    ResultScreen(result.first),
+                              ));
+                          //Verifica se o campo está vázio e exibe um SnackBar
+                        } else if (search == null) {
+                          Navigator.of(context).pop();
+                          //Procura o Scaffold na árvore de widget
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  duration: Duration(seconds: 3),
+                                  content: Text('O campo não foi preenchido')));
+                        }
+                        //Se o elemento não for encontrado exibe um Snackbar
+                        else {
+                          Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: const Duration(seconds: 2),
+                              content: Text(
+                                  'Não foram encrontrado resultado para: $search')));
+                        }
+                      },
+                      icon: const Icon(Icons.search),
+                    ),
+                    label: const Text('Para onde gostaria de ir?')),
+              ),
+              ListTile(
+                title: Text('Destinos'),
+                leading: Icon(Icons.airplanemode_active),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                title: Text('Contato'),
+                leading: Icon(Icons.phone),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactScreen()));
+                },
+              ),
+              ListTile(
+                title: Text('Sobre nós'),
+                leading: Icon(Icons.person),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutScreen()));
+                },
+              ),
+            ],
           ),
         ),
       ),

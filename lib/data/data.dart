@@ -7,7 +7,7 @@ class Data {
         //Id
         'id': 1,
         //Titulo
-        'title': 'Rio de janeiro',
+        'title': 'Rio de Janeiro',
         //Preço
         'price': '400.00BRL',
         //Url da imagem salva na pasta assets

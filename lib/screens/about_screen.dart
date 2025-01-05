@@ -24,7 +24,7 @@ class AboutScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 14,
+              height: 20,
             ),
             Text(
               textAlign: TextAlign.center,

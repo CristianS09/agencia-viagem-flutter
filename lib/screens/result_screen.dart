@@ -1,42 +1,40 @@
-import 'package:agencia_viagem/data/data.dart';
 import 'package:agencia_viagem/model/destination.dart';
-
 import 'package:flutter/material.dart';
 
-//Widget para exibir os destinos
-class DataList extends StatelessWidget {
-  DataList({super.key});
-
-  //Lista de Map com os dados de destinos
-  final List<Map<String, dynamic>> list = Data.getList;
-  //Lista de destinos
-  List<Destination> destinationList = [];
-
+//Widget com o resultado da pesquisa
+class ResultScreen extends StatelessWidget {
+  late Map data;
+  //Recebe os dados no construtor
+  ResultScreen(this.data, {super.key});
   @override
   Widget build(BuildContext context) {
-    //Retorna uma lista de objetos destino para cada valor na lista de Map
-    destinationList = list
-        .map((e) => Destination(
-            title: e['title'],
-            price: e['price'],
-            url: e['url'],
-            reviews: e['reviews'],
-            description: e['description'],
-            country: e['country']))
-        .toList();
-    //ListView que exibe todo o conteúdo da lista
-    return ListView.builder(
-      itemCount: destinationList.length,
-      itemBuilder: (context, index) {
-        //Retorna um objeto destino de acordo com o index
-        Destination destination = destinationList.elementAt(index);
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            color: Colors.white,
-            elevation: 15,
-            child: Column(
-              children: [
+    //Objeto destino
+    Destination destination = Destination(
+        title: data['title'],
+        price: data['price'],
+        url: data['url'],
+        reviews: data['reviews'],
+        description: data['description'],
+        country: data['country']);
+    return Scaffold(
+      appBar: AppBar(
+        //Centraliza o texto no centro da AppBar
+        centerTitle: true,
+        //Define uma cor para o icone de voltar
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black87,
+        title: const Text(
+          'Explore Mundo',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 15,
+              child: Column(children: [
                 Text(
                   '${destination.title}',
                   style: const TextStyle(
@@ -48,7 +46,7 @@ class DataList extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
                   subtitle: Text(
-                    '${destination.price}',
+                    '${destination.title}',
                   ),
                   leading: const Icon(
                     Icons.monetization_on,
@@ -79,12 +77,12 @@ class DataList extends StatelessWidget {
                 ListTile(
                   subtitle: Text('${destination.description}'),
                   leading: Icon(Icons.notes_sharp),
-                ),
-              ],
+                )
+              ]),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
