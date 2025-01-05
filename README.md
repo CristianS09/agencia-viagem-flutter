@@ -1,16 +1,16 @@
-# agencia_viagem
+# Agência de Viagem
 
-A new Flutter project.
+Aplicativo de agência de viagem desenvolvido em Flutter para a missão prática da faculdade.
 
-## Getting Started
+![App Gif](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGV4Zm5qNzRrNDB1amtubXZvOWY3Z3B6M2oweHdzNGh5NzN6OGJzbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VucOURPZnWttouAovM/giphy.gif)
 
-This project is a starting point for a Flutter application.
+## Tecnologias Utilizadas
+- **Linguagem:** Dart 🧑🏻‍💻
+- **Framework:** Flutter 📱
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Recursos
+- Barra de pesquisa
+- Lista com os destinos e informação sobre preço, avaliação, descrição e país
+- Navegação com Drawer
+- Aba sobre
+- Aba de contato
